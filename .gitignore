@@ -1,5 +1,16 @@
+# Ignore everything by default
 *
+
+# Don't ignore these file types
 !*.py
+!*.md
+!*.txt
 !.gitignore
 !README.md
 !requirements.txt
+
+# Don't ignore these folders and their nested folders and python files
+!agent/
+!agent/**/*.py
+!data/
+!data/**/*py
