@@ -2,7 +2,7 @@ import os
 import openai
 from dotenv import load_dotenv
 
-class OpenAIAgent:
+class OpenAITestAgent:
     def __init__(self, is_runtime: bool = False):
         self.is_runtime = is_runtime
         load_dotenv()

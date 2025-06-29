@@ -1,26 +1,27 @@
-from agent import GPTAgent
+from agent import RouteAgent, LangChainPandasAgent
 from data import DataHandler
+from dotenv import load_dotenv
+load_dotenv()
+
+
+DEFAULT_DATA_PATH = "resources/cortex.parquet"
 
 
 def main():
-    # Initialize and load data
-    data_handler = DataHandler('resources/cortex.parquet')
-    data_handler.load_data()
+    data_handler = DataHandler(DEFAULT_DATA_PATH)
 
-    # Create the GPT agent
-    agent = GPTAgent(data_handler, is_runtime=True)  # Set to False to avoid using tokens
+    agent = RouteAgent(data_handler)
+    # agent = LangChainPandasAgent(data_handler)
 
-    print("GPT Real Estate Agent ready. Type 'exit' to quit.\n")
+    print("LangChain Real Estate Agent ready. Type 'exit' to quit.\n")
 
     while True:
-        user_input = input("You: ")
-        if user_input.lower() in ["exit", "quit"]:
+        query = input("You: ")
+        if query.lower() in ["exit", "quit"]:
             break
 
-        response = agent.handle_request(user_input)
-        print(f"Agent: {response}\n")
-
-        break
+        answer = agent.run(query)
+        print(f"Agent: {answer}\n")
 
 
 if __name__ == "__main__":

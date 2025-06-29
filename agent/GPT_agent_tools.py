@@ -1,5 +1,5 @@
 from langchain_core.tools import StructuredTool
-from data import DataHandler  # Adjust path as needed
+from data import DataHandler
 
 class GPTAgentTools:
     def __init__(self, data_handler: DataHandler):

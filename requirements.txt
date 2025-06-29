@@ -2,3 +2,8 @@ openai
 python-dotenv
 pandas
 pyarrow
+langchain
+langchain-openai
+langchain-community
+langchain_experimental
+tabulate
