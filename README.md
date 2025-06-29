@@ -117,3 +117,21 @@ The final answer is shown clearly and handles vague or incomplete input by falli
                           | GPTAgent|  <- Handles specific tasks           | LangChainPandas |
                           |  Tools  |     (like P&L, comparisons)          | Agent            |
                           +---------+                                      +------------------+
+
+---
+
+## Challenges and How I Solved Them
+
+### 1. LangChain Pandas Agent Limitations
+
+Sometimes the LangChain Pandas agent didn't behave as expected or failed to format the response in a way I needed.
+To handle this, I built a flexible architecture that supports both a smart fallback agent (Pandas) and custom tool functions for well-defined tasks.
+I introduced a router agent that decides, per query, whether to use a specific tool or delegate the task to the Pandas agent.
+
+### 2. Routing Sensitivity and GPT Behavior
+
+Determining whether a request should go to a tool or the Pandas agent was challenging.
+I used GPT to classify the user's intent, but early on it preferred tools even when the input was vague or didn’t match tool requirements.
+This happened because GPT tends to confidently pick an option that sounds relevant—even when it isn’t.
+I resolved this by crafting a strict routing prompt that forces GPT to choose a tool only if all required details are clearly present.
+If not, it defaults to the more flexible Pandas agent.
